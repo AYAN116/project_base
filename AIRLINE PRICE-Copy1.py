@@ -1,100 +1,55 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[58]:
-
 
 import os
-
-
-# In[59]:
-
-
 os.getcwd()
-
-
-# In[60]:
-
 
 os.chdir("D:\PYTHON\Practice")
-
-
-# In[61]:
-
-
 os.getcwd()
 
-
-# In[62]:
-
+# Importing libraries:
 
 import pandas as pd 
 import numpy as np
 
-
-# In[63]:
-
-
 # QUESTION : 1
 # PREDICT THE PRICE OF AIRLINE SURVICE ? 
 
-
-# In[64]:
-
+# Laoding the dataset on jupiter notebook:
 
 Airline_data=pd.read_csv("C:/Users/AYAN/Downloads/DATASETS/Hackathontrain.csv",encoding = 'Latin-1')
 Airline_data.head(5)
 
-
-# In[65]:
-
+# Checking weaather the data is continous or catagorical:
 
 Airline_data.nunique()
 
 
-# In[66]:
-
+# No.of columns and rows count:
 
 Airline_data.shape
 
-
-# In[67]:
-
+# Extracting out the Required column:
 
 column = ["Distance","Aircraft_Type","Number_of_Stops","Day_of_Week","Month_of_Travel","Holiday_Season","Demand",
 "Passenger_Count","Promotion_Type","Fuel_Price","Flight_Price"]
 Airline_Data=Airline_data[column]
 Airline_Data.head(5)
 
-
 # In[68]:
-
 
 Airline_Data.nunique()
 
-
-# In[69]:
-
+# Differentiating the Continous and Catagorical Columns:
 
 Catagory_clm=["Aircraft_Type","Number_of_Stops","Day_of_Week","Month_of_Travel","Holiday_Season","Demand","Promotion_Type"]
 Conti_clm=["Distance","Passenger_Count","Fuel_Price","Flight_Price"]
 
-
-# In[70]:
-
+# Histogram chart to check Data Distribution:
 
 Airline_Data.hist(Conti_clm,figsize=(20,5))
 
-
-# In[71]:
-
+# Calling libarary for visual representation:
 
 import matplotlib.pyplot as plt
-
-
-# In[72]:
-
-
 def dist_check(data, colTOplot):
     get_ipython().run_line_magic('matplotlib', 'inline')
     
@@ -107,42 +62,29 @@ def dist_check(data, colTOplot):
         data.groupby(colname).size().plot(kind='bar',ax = position[i])
     
 
-
-# In[73]:
-
-
 dist_check(Airline_Data,Catagory_clm)
 
 
-# In[74]:
-
+# Checking No.of null/missing records:
 
 Airline_Data.isnull().sum()
 
-
 # In[75]:
-
 
 import warnings
 warnings.filterwarnings('ignore')
 
-
-# In[76]:
-
+# Dropping of the duplicate Records:
 
 print(Airline_Data.shape)
 Airline_Data=Airline_Data.drop_duplicates()
 print(Airline_Data.shape)
 
-
-# In[ ]:
-
+# Storing the filtered data in desktop:
 
 Airline_Data.to_csv("D:/PYTHON/Practice/Airline_data.csv")
 
-
 # In[78]:
-
 
 Airline_data.head(5)
 
